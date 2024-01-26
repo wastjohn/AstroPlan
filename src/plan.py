@@ -21,14 +21,9 @@ from astropy.coordinates import angular_separation
 from matplotlib.backends.backend_pdf import PdfPages
 
 # %matplotlib notebook
-def plan():
-    # Enter output location for files and figures:
-    outdir='/Users/research/Desktop/'
+def plan(ra, dec, name):
 
     # Enter source ra,dec (J2000) in DEGREES:
-    ra=83.8186621
-    dec=-5.3896789
-    name='Orion Nebula'
     source=SkyCoord(ra*u.deg,dec*u.deg)
 
     # Sun ephemeris:
@@ -143,37 +138,74 @@ def plan():
 
 
 # # Macalester information:
-
-# mac = Observer(longitude=-93.1691*u.deg, latitude=44.9379*u.deg, elevation=240*u.m, name="Macalester", timezone="US/Central")
-# now=Time.now()
-# sun= get_body('sun',now)
-# deltasun = (sun.transform_to(AltAz(obstime=now,location=mac.location)).alt).value - (sun.transform_to(AltAz(obstime=now+1*u.second,location=mac.location)).alt).value
-# print('---------------------------------------')
-# print('Macalester is located at:')
-# print('  Latitude = '+str(mac.latitude))
-# print('  Longitude = '+str(mac.longitude))
-# print('  Altitude = '+str(mac.elevation))
-# print('')
-# print('Current Macalester information (UTC):')
-# print('  Date = '+str(now)+' UTC')
-# print('  JD   = '+str(now.jd))               # Julian Date
-# print('  MJD  = '+str(now.mjd))              # Modified Julian Date
-# print('  Decimal year = '+str(now.decimalyear))  
-# print('  LST = '+str(mac.local_sidereal_time(now)))
-# print('  Sun altitude = '+str(sun.transform_to(AltAz(obstime=now,location=mac.location)).alt))
-# if deltasun > 0:
-#     print('  Sun is setting')
-# else:
-#     print('  Sun is rising')
-# print('')
-# print('Sunset and sunrise times (UTC):')
-# print('  Sunset = '+str(mac.sun_set_time(now, which='nearest').to_datetime(mac.timezone)))
-# print('  Midnight = '+str(mac.midnight(now, which='next').to_datetime(mac.timezone)))
-# print('  Sunrise = '+str(mac.sun_rise_time(now, which='next').to_datetime(mac.timezone)))
-# print('---------------------------------------')
+def getMacInfo():
+    mac = Observer(longitude=-93.1691*u.deg, latitude=44.9379*u.deg, elevation=240*u.m, name="Macalester", timezone="US/Central")
+    now=Time.now()
+    sun= get_body('sun',now)
+    deltasun = (sun.transform_to(AltAz(obstime=now,location=mac.location)).alt).value - (sun.transform_to(AltAz(obstime=now+1*u.second,location=mac.location)).alt).value
+    if deltasun > 0:
+        sunsetting = "Sun is setting"
+    else:
+        sunsetting = "Sun is rising"
+    
+    output = f"""
+    ---------------------------------------
+    Macalester is located at:\n
+    \tLatitude = {str(mac.latitude)}\n
+    \tLongitude = {str(mac.longitude)}\n
+    \tAltitude = {str(mac.elevation)}\n
+    \n
+    Current Macalester information (UTC):\n
+    \tDate = {str(now)} UTC\n
+    \tJD   = {str(now.jd)}\n
+    \tMJD  = {str(now.mjd)}\n
+    \tDecimal year = {str(now.decimalyear)}\n
+    \tLST = {str(mac.local_sidereal_time(now))}\n
+    \tSun altitude = {str(sun.transform_to(AltAz(obstime=now,location=mac.location)).alt)}\n
+    \t{sunsetting}\n
+    \n
+    Sunset and sunrise times (UTC):\n
+    \tSunset = {str(mac.sun_set_time(now, which='nearest').to_datetime(mac.timezone))}\n
+    \tMidnight = {str(mac.midnight(now, which='next').to_datetime(mac.timezone))}\n
+    \tSunrise = {str(mac.sun_rise_time(now, which='next').to_datetime(mac.timezone))}\n
+    ---------------------------------------
+    """
+    return output
 
 # # RLMT information:
-
+def getRLMTInfo():
+    winer = Observer.at_site('Winer')
+    now=Time.now()
+    sun= get_body('sun',now)
+    deltasun = (sun.transform_to(AltAz(obstime=now,location=winer.location)).alt).value - (sun.transform_to(AltAz(obstime=now+1*u.second,location=winer.location)).alt).value
+    if deltasun > 0:
+        sunsetting = "Sun is setting"
+    else:
+        sunsetting = "Sun is rising"
+    
+    output = f"""
+    ---------------------------------------
+    Winer is located at:\n
+    \tLatitude = {str(winer.latitude)}\n
+    \tLongitude = {str(winer.longitude)}\n
+    \tAltitude = {str(winer.elevation)}\n
+    \n
+    Current Winer information (UTC):\n
+    \tDate = {str(now)} UTC\n
+    \tJD   = {str(now.jd)}\n
+    \tMJD  = {str(now.mjd)}\n
+    \tDecimal year = {str(now.decimalyear)}\n
+    \tLST = {str(winer.local_sidereal_time(now))}\n
+    \tSun altitude = {str(sun.transform_to(AltAz(obstime=now,location=winer.location)).alt)}\n
+    \t{sunsetting}\n
+    \n
+    Sunset and sunrise times (UTC):\n
+    \tSunset = {str(winer.sun_set_time(now, which='nearest').to_datetime(winer.timezone))}\n
+    \tMidnight = {str(winer.midnight(now, which='next').to_datetime(winer.timezone))}\n
+    \tSunrise = {str(winer.sun_rise_time(now, which='next').to_datetime(winer.timezone))}\n
+    ---------------------------------------
+    """
+    return output
 # winer = Observer.at_site('Winer')
 # now=Time.now()
 # sun= get_body('sun',now)
