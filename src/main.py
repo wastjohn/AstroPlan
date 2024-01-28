@@ -27,11 +27,15 @@ import astropy.coordinates as coord
 from astropy.coordinates import angular_separation
 from matplotlib.backends.backend_pdf import PdfPages
 import plan
+from astropy.io import ascii
 
 # %matplotlib notebook
 st.title("AstroPlan")
 
 st.write("This is a web app to help you plan your astrophotography sessions.")
+targets = ascii.read("res/targets.dat")
+st.dataframe(targets)
+
 ra_col, dec_col, target_name_col = st.columns(3)
 ra = ra_col.number_input("RA", min_value=0.0000000, max_value=359.9999999, value=83.8186621, step=0.0000001, format="%.7f")
 dec = dec_col.number_input("DEC", min_value=-90.0000000, max_value=90.0000000, value=-5.3896789, step=0.0000001, format="%.7f")

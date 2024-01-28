@@ -1,0 +1,104 @@
+# 
+# VizieR Astronomical Server vizier.cds.unistra.fr
+# Date: 2024-01-24T20:56:47 [V7.32.7]
+# In case of problem, please report to:	cds-question@unistra.fr
+# 
+# 
+# Coosys	J2000:	eq_FK5 J2000
+# INFO	protocol=ASU
+# INFO	request_date=2024-01-24T20:56:47
+# INFO	request_post=https://vizier.cds.unistra.fr//viz-bin/asu-tsv
+# -oc.form=dec
+# -out.max=unlimited
+# -order=I
+# -nav=cat:J/A+A/543/A156&tab:{J/A+A/543/A156/catal_q2}&key:source=J/A+A/543/A156/catal_q2&HTTPPRM:&&-ref=VIZ65b173ab304672&-out.max=unlimited&-out.form=HTML Table&-order=I&-oc.form=dec&-c.eq=J2000&-c.r=  2&-c.u=arcmin&-c.geom=r&-out=map&-out=cmd&cmd=cmd&-out=stars&stars=stars&-out=MWSC&-out=Name&-out=Type&-out=u_Type&-out=RAJ2000&-out=DEJ2000&-out=r0&-out=r1&-out=r2&-out=pmRA&-out=pmDE&-out=RV&-out=d&-out=E(B-V)&-out=MOD&-out=logt&-out=rc&-out=rt&-out=k&-out=Source&-out=SType&-out=[Fe/H]&-out.src=J/A+A/543/A156/catal_q2&-meta.ucd=2&-meta=1&-meta.foot=1&-usenav=1&-bmark=POST&
+# -c.eq=J2000
+# -c.r=  2
+# -c.u=arcmin
+# -c.geom=r
+# -source= J/A+A/543/A156/catal_q2
+# -out=map
+# -out=cmd
+# cmd=cmd
+# -out=stars
+# stars=stars
+# -out=MWSC
+# -out=Name
+# -out=Type
+# -out=u_Type
+# -out=RAJ2000
+# -out=DEJ2000
+# -out=r0
+# -out=r1
+# -out=r2
+# -out=pmRA
+# -out=pmDE
+# -out=RV
+# -out=d
+# -out=E(B-V)
+# -out=MOD
+# -out=logt
+# -out=rc
+# -out=rt
+# -out=k
+# -out=Source
+# -out=SType
+# -out=[Fe/H]
+# -out.src=J/A+A/543/A156/catal_q2
+# 
+# INFO	contact=cds-question@unistra.fr
+# INFO	version=7.32.7
+# INFO	-out.max=unlimited
+# RESOURCE=yCat_35430156
+# Name: J/A+A/543/A156
+# Title: Milky Way global survey of star clusters (Kharchenko+, 2012)
+# INFO	ivoid=ivo://cds.vizier/j/a+a/543/a156
+# INFO	publisher=CDS
+# INFO	creator=Kharchenko N.V.
+# INFO	related_resource=bibcode:2012A&A...543A.156K
+# INFO	landing_page=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/543/A156
+# INFO	publication_id=doi:10.26093/cds/vizier.35430156
+# INFO	publication_date=2017-11-10
+# INFO	curation_level=RESEARCH
+# INFO	rights=https://cds.unistra.fr/vizier-org/licences_vizier.html
+# Table	J_A_A_543_A156_catal_q2:
+# Name: J/A+A/543/A156/catal_q2
+# Title: Catalog of parameters for open clusters
+# Column	map	(A3)	Simbad column added by the CDS	[ucd=meta.ref.url]
+# Column	cmd	(A3)	Simbad column added by the CDS	[ucd=meta.ref.url]
+# Column	stars	(a5)	Display this cluster star catalog	[ucd=meta.ref.url]
+# Column	MWSC	(A4)	MWSC cluster sequential number	[ucd=meta.record]
+# Column	Name	(a17)	NGC, IC or other common designation	[ucd=meta.id]
+# Column	Type	(A1)	[a,g,m,n,r,*] Object type (G1)	[ucd=src.class]
+# Column	u_Type	(A1)	[?, ] Uncertainty of object type	[ucd=meta.note]
+# Column	RAJ2000	(F7.3)	Adopted cluster centre in RA J2000.0	[ucd=pos.eq.ra;meta.main]
+# Column	DEJ2000	(F7.3)	Adopted cluster centre in Dec J2000.0	[ucd=pos.eq.dec;meta.main]
+# Column	r0	(F7.3)	? Angular radius of the core	[ucd=phys.angSize]
+# Column	r1	(F7.3)	Angular radius of the central part	[ucd=meta.id.part;phys.angSize]
+# Column	r2	(F7.3)	Angular radius of the cluster	[ucd=phys.angSize]
+# Column	pmRA	(F7.2)	Average proper motion in RA*cos(DE)	[ucd=pos.pm;pos.eq.ra]
+# Column	pmDE	(F7.2)	Average proper motion in DE	[ucd=pos.pm;pos.eq.dec]
+# Column	RV	(F8.2)	? Average radial velocity	[ucd=phys.veloc;pos.heliocentric]
+# Column	d	(F8)	Distance from the Sun	[ucd=pos.distance;pos.heliocentric]
+# Column	E(B-V)	(F7.3)	Colour-excess in (B-V)	[ucd=phot.color.excess]
+# Column	MOD	(F7.3)	Apparent distance modulus, Ks-M_Ks_	[ucd=phot.mag.distMod]
+# Column	logt	(F7.3)	Logarithm of average age	[ucd=time.age;stat.mean]
+# Column	rc	(F8.2)	? King' core radius	[ucd=phys.size.radius]
+# Column	rt	(F8.2)	? King' tidal radius	[ucd=phys.size.radius]
+# Column	k	(F8.2)	? King' normalization factor	[ucd=stat.fit.param]
+# Column	Source	(A4)	Source for MWSC list and input parameters (G2)	[ucd=meta.bib]
+# Column	SType	(A3)	Source object type (G3)	[ucd=src.class]
+# Column	[Fe/H]	(F8.3)	? Metallicity (3)	[ucd=phys.abund.Z]
+map cmd stars MWSC Name Type u_Type RAJ2000 DEJ2000 r0 r1 r2 pmRA pmDE RV d E(B-V) MOD logt rc rt k Source SType [Fe/H]
+map cmd stars 0313 Juchert_9 r "" 58.837 58.4 0.01 0.035 0.07 -0.51 1.76 -999999.0 3971.0 1.416 13.45 6.7 1.03 6.19 1.86 DIAS "" -999999.0
+map cmd stars 0323 Alicante_1 "" "" 59.785 57.24 0.01 0.03 0.06 -1.76 1.36 -32.4 4299.0 0.6 13.36 6.35 0.46 7.18 4.44 DIAS "" -999999.0
+map cmd stars 0373 FSR_0671 r "" 65.617 51.855 0.01 0.04 0.1 -1.2 2.09 -999999.0 3501.0 1.399 13.171 7.9 1.03 8.22 1.28 DIAS irc -999999.0
+map cmd stars 0385 NGC_1579 n "" 67.546 35.279 0.06 0.17 0.42 6.42 -7.28 -999999.0 730.0 2.956 10.267 6.58 1.09 6.54 31.54 BIEM irc -999999.0
+map cmd stars 0441 Czernik_19 "" "" 74.277 28.781 0.015 0.1 0.19 1.22 -2.68 -999999.0 2499.0 0.67 12.205 7.835 1.73 13.25 6.61 DIAS "" -999999.0
+map cmd stars 0474 King_17 "" "" 77.1 39.08 0.015 0.065 0.125 -5.74 0.76 -999999.0 3000.0 0.7 12.611 7.85 0.83 13.57 7.33 DIAS "" -999999.0
+map cmd stars 0512 Berkeley_18 "" "" 80.602 45.405 0.03 0.13 0.275 -0.37 -3.58 -999999.0 5800.0 0.45 13.962 9.63 9.21 44.87 1.01 DIAS "" 0.02
+map cmd stars 0516 NGC_1893 "" "" 80.707 33.43 0.035 0.1 0.28 2.25 -5.65 -9.17 3300.0 0.949 12.898 6.55 1.91 15.61 15.0 COCD "" -999999.0
+map cmd stars 0527 Berkeley_19 "" "" 81.003 29.567 0.02 0.055 0.09 2.55 -2.2 -999999.0 4800.0 0.4 13.535 9.5 1.32 13.84 4.9 DIAS "" -0.5
+map cmd stars 0631 Sh2_235B n "" 85.222 35.707 0.025 0.08 0.14 0.76 -5.23 -999999.0 2300.0 1.299 12.227 8.15 2.49 8.45 1.56 LLEM emb -999999.0
+map cmd stars 0639 BDSB_73 "" "" 85.387 35.861 0.025 0.09 0.185 2.89 -4.8 -999999.0 1140.0 0.36 10.4 9.5 1.26 5.75 3.64 FPRO "" -999999.0
+map cmd stars 0708 NGC_2126 "" "" 90.648 49.872 0.04 0.09 0.225 -1.38 -1.71 -999999.0 1100.0 0.05 10.223 9.45 0.98 7.15 15.8 DIAS "" -999999.0
