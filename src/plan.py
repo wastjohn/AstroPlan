@@ -206,128 +206,116 @@ def getRLMTInfo():
     ---------------------------------------
     """
     return output
-# winer = Observer.at_site('Winer')
-# now=Time.now()
-# sun= get_body('sun',now)
-# deltasun = (sun.transform_to(AltAz(obstime=now,location=winer.location)).alt).value - (sun.transform_to(AltAz(obstime=now+1*u.second,location=winer.location)).alt).value
-# print('---------------------------------------')
-# print('Winer is located at:')
-# print('  Latitude = '+str(winer.latitude))
-# print('  Longitude = '+str(winer.longitude))
-# print('  Altitude = '+str(winer.elevation))
-# print('')
-# print('Current Winer information (UTC):')
-# print('  Date = '+str(now)+' UTC')
-# print('  JD   = '+str(now.jd))               # Julian Date
-# print('  MJD  = '+str(now.mjd))              # Modified Julian Date
-# print('  Decimal year = '+str(now.decimalyear))  
-# print('  LST = '+str(winer.local_sidereal_time(now)))
-# print('  Sun altitude = '+str(sun.transform_to(AltAz(obstime=now,location=winer.location)).alt))
-# if deltasun > 0:
-#     print('  Sun is setting')
-# else:
-#     print('  Sun is rising')
-# print('')
-# print('Sunset and sunrise times (UTC):')
-# print('  Sunset = '+str(winer.sun_set_time(now, which='nearest').to_datetime(winer.timezone)))
-# print('  Midnight = '+str(winer.midnight(now, which='next').to_datetime(winer.timezone)))
-# print('  Sunrise = '+str(winer.sun_rise_time(now, which='next').to_datetime(winer.timezone)))
-# print('---------------------------------------')
 
-# # Macalester Observatory
 
-# # Set cadence of plots to examine location of source, Sun, and Moon:
+# Macalester Observatory
 
-# starttime = Time('2024-01-01 00:00:00')
-# obs=EarthLocation(mac.location)
-# interval = 7*u.day
-# # interval = 1*u.day
+# Set cadence of plots to examine location of source, Sun, and Moon:
+def getMacObsPlots(ra, dec, name):
+    source=SkyCoord(ra*u.deg,dec*u.deg)
+    mac = Observer(longitude=-93.1691*u.deg, latitude=44.9379*u.deg, elevation=240*u.m, name="Macalester", timezone="US/Central")
 
-# midnightlist = []
+    starttime = Time('2024-01-01 00:00:00')
+    obs=EarthLocation(mac.location)
+    interval = 7*u.day
+    # interval = 1*u.day
 
-# for i in range(0,53):
-# # for i in range(0,365):
-#     time = starttime + interval*[i]
-#     midnight = (mac.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
-#     date = time.to_value('iso',subfmt='date_hm')[0]
-#     midnighttime = Time(midnight)
-#     midnightlist.append(midnighttime)
+    midnightlist = []
 
-# # Loop over midnightlist to plot the Sun, Moon, and source altitude vs. time:
-# with PdfPages(outdir+str(name)+'.Mac-weekly-plan.pdf') as pdf:
-#     for i in range(0,len(midnightlist)):
-#         time = midnightlist[i]    
-#         sourcealtaz = source.transform_to(AltAz(obstime=time,location=obs))
-#         delta_t = np.linspace(-12, 12, 2001)*u.hour
-#         frame = AltAz(obstime=time+delta_t,location=obs)
-#         sourcealtaz = source.transform_to(frame)
-#         times = time + delta_t
-#         sunaltaz = get_body("sun",times).transform_to(frame)
-#         moonaltaz = get_body("moon",times).transform_to(frame)
+    for i in range(0,5):  # number of weeks in a year + 1
+    # for i in range(0,365):
+        time = starttime + interval*[i]
+        midnight = (mac.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
+        date = time.to_value('iso',subfmt='date_hm')[0]
+        midnighttime = Time(midnight)
+        midnightlist.append(midnighttime)
 
-#         fig, ax = plt.subplots(figsize=(15, 11))
-#         ax.set_xlabel(r'Hours from astronomical midnight at UT = '+str(time))
-#         ax.set_ylabel('Altitude [deg]',size=30)
-#         ax.tick_params(axis='both', labelsize=25)
-#         ax.set_xlim(-12.*u.hour, 12*u.hour)
-#         ax.set_ylim(0*u.deg, 90*u.deg)
-#         ax.plot(delta_t, sunaltaz.alt, color='orange', label='Sun', linewidth=3)
-#         ax.plot(delta_t, moonaltaz.alt, color='darkgrey', ls='--', label='Moon', linewidth=2)   
-#         ax.plot(delta_t, sourcealtaz.alt, color='dodgerblue', label=str(name), linewidth=4)  
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -0*u.deg, color='0.8', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -6*u.deg, color='0.5', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -12*u.deg, color='0.2', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -18*u.deg, color='k', zorder=0)
-#         plt.legend(loc=1,fontsize=20, facecolor='white', framealpha=0.95)
-#         plt.title('Macalester Observatory: '+str(name)+' on '+str(midnightlist[i])[0:10],fontsize=25)
-#         pdf.savefig(dpi=100)
-#         plt.close()
+    figs = []
+    # Loop over midnightlist to plot the Sun, Moon, and source altitude vs. time:
+    # with PdfPages(outdir+str(name)+'.Mac-weekly-plan.pdf') as pdf:
+    for i in range(0,len(midnightlist)):
+        time = midnightlist[i]    
+        sourcealtaz = source.transform_to(AltAz(obstime=time,location=obs))
+        delta_t = np.linspace(-12, 12, 2001)*u.hour
+        frame = AltAz(obstime=time+delta_t,location=obs)
+        sourcealtaz = source.transform_to(frame)
+        times = time + delta_t
+        sunaltaz = get_body("sun",times).transform_to(frame)
+        moonaltaz = get_body("moon",times).transform_to(frame)
 
-# # RLMT:
+        fig, ax = plt.subplots(figsize=(15, 11))
+        ax.set_xlabel(r'Hours from astronomical midnight at UT = '+str(time))
+        ax.set_ylabel('Altitude [deg]',size=30)
+        ax.tick_params(axis='both', labelsize=25)
+        ax.set_xlim(-12.*u.hour, 12*u.hour)
+        ax.set_ylim(0*u.deg, 90*u.deg)
+        ax.plot(delta_t, sunaltaz.alt, color='orange', label='Sun', linewidth=3)
+        ax.plot(delta_t, moonaltaz.alt, color='darkgrey', ls='--', label='Moon', linewidth=2)   
+        ax.plot(delta_t, sourcealtaz.alt, color='dodgerblue', label=str(name), linewidth=4)  
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -0*u.deg, color='0.8', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -6*u.deg, color='0.5', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -12*u.deg, color='0.2', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -18*u.deg, color='k', zorder=0)
+        plt.legend(loc=1,fontsize=20, facecolor='white', framealpha=0.95)
+        plt.title('Macalester Observatory: '+str(name)+' on '+str(midnightlist[i])[0:10],fontsize=25)
+        # pdf.savefig(dpi=100)
+        plt.close()
+        figs.append(fig)
+    
+    return figs
 
-# # Set cadence of plots to examine location of source, Sun, and Moon:
+# RLMT:
+# Set cadence of plots to examine location of source, Sun, and Moon:
 
-# starttime = Time('2024-01-01 00:00:00')
-# obs=EarthLocation(winer.location)
-# interval = 7*u.day
-# # interval = 1*u.day
+def getRLMTObsPlots(ra, dec, name):
+    source=SkyCoord(ra*u.deg,dec*u.deg)
+    winer = Observer.at_site('Winer')
 
-# midnightlist = []
 
-# for i in range(0,53):
-# # for i in range(0,365):
-#     time = starttime + interval*[i]
-#     midnight = (winer.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
-#     date = time.to_value('iso',subfmt='date_hm')[0]
-#     midnighttime = Time(midnight)
-#     midnightlist.append(midnighttime)
+    starttime = Time('2024-01-01 00:00:00')
+    obs=EarthLocation(winer.location)
+    interval = 7*u.day
+    # interval = 1*u.day
 
-# # Loop over midnightlist to plot the Sun, Moon, and source altitude vs. time:
-# with PdfPages(outdir+str(name)+'.RLMT-weekly-plan.pdf') as pdf:
-#     for i in range(0,len(midnightlist)):
-#         time = midnightlist[i]    
-#         sourcealtaz = source.transform_to(AltAz(obstime=time,location=obs))
-#         delta_t = np.linspace(-12, 12, 2001)*u.hour
-#         frame = AltAz(obstime=time+delta_t,location=obs)
-#         sourcealtaz = source.transform_to(frame)
-#         times = time + delta_t
-#         sunaltaz = get_body("sun",times).transform_to(frame)
-#         moonaltaz = get_body("moon",times).transform_to(frame)
+    midnightlist = []
 
-#         fig, ax = plt.subplots(figsize=(15, 11))
-#         ax.set_xlabel(r'Hours from astronomical midnight at UT = '+str(time))
-#         ax.set_ylabel('Altitude [deg]',size=30)
-#         ax.tick_params(axis='both', labelsize=25)
-#         ax.set_xlim(-12.*u.hour, 12*u.hour)
-#         ax.set_ylim(0*u.deg, 90*u.deg)
-#         ax.plot(delta_t, sunaltaz.alt, color='orange', label='Sun', linewidth=3)
-#         ax.plot(delta_t, moonaltaz.alt, color='darkgrey', ls='--', label='Moon', linewidth=2)   
-#         ax.plot(delta_t, sourcealtaz.alt, color='dodgerblue', label=str(name), linewidth=4)  
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -0*u.deg, color='0.8', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -6*u.deg, color='0.5', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -12*u.deg, color='0.2', zorder=0)
-#         ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -18*u.deg, color='k', zorder=0)
-#         plt.legend(loc=1,fontsize=20, facecolor='white', framealpha=0.95)
-#         plt.title('RLMT: '+str(name)+' on '+str(midnightlist[i])[0:10],fontsize=25)
-#         pdf.savefig(dpi=100)
-#         plt.close()
+    for i in range(0,5):  # number of weeks in a year + 1
+    # for i in range(0,365):
+        time = starttime + interval*[i]
+        midnight = (winer.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
+        date = time.to_value('iso',subfmt='date_hm')[0]
+        midnighttime = Time(midnight)
+        midnightlist.append(midnighttime)
+
+    figs = []
+    # Loop over midnightlist to plot the Sun, Moon, and source altitude vs. time:
+    # with PdfPages(outdir+str(name)+'.RLMT-weekly-plan.pdf') as pdf:
+    for i in range(0,len(midnightlist)):
+        time = midnightlist[i]    
+        sourcealtaz = source.transform_to(AltAz(obstime=time,location=obs))
+        delta_t = np.linspace(-12, 12, 2001)*u.hour
+        frame = AltAz(obstime=time+delta_t,location=obs)
+        sourcealtaz = source.transform_to(frame)
+        times = time + delta_t
+        sunaltaz = get_body("sun",times).transform_to(frame)
+        moonaltaz = get_body("moon",times).transform_to(frame)
+
+        fig, ax = plt.subplots(figsize=(15, 11))
+        ax.set_xlabel(r'Hours from astronomical midnight at UT = '+str(time))
+        ax.set_ylabel('Altitude [deg]',size=30)
+        ax.tick_params(axis='both', labelsize=25)
+        ax.set_xlim(-12.*u.hour, 12*u.hour)
+        ax.set_ylim(0*u.deg, 90*u.deg)
+        ax.plot(delta_t, sunaltaz.alt, color='orange', label='Sun', linewidth=3)
+        ax.plot(delta_t, moonaltaz.alt, color='darkgrey', ls='--', label='Moon', linewidth=2)   
+        ax.plot(delta_t, sourcealtaz.alt, color='dodgerblue', label=str(name), linewidth=4)  
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -0*u.deg, color='0.8', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -6*u.deg, color='0.5', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -12*u.deg, color='0.2', zorder=0)
+        ax.fill_between(delta_t, 0*u.deg, 90*u.deg, sunaltaz.alt < -18*u.deg, color='k', zorder=0)
+        plt.legend(loc=1,fontsize=20, facecolor='white', framealpha=0.95)
+        plt.title('RLMT: '+str(name)+' on '+str(midnightlist[i])[0:10],fontsize=25)
+        # pdf.savefig(dpi=100)
+        plt.close()
+        figs.append(fig)
+    return figs

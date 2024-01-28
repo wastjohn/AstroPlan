@@ -50,5 +50,13 @@ Your latitude is the Dec of your zenith (the angle normal to the ground at your 
 So if your latitude is 40 degrees, your zenith is at 40 degrees Dec.\n
 Assuming you can see an entire hemisphere of the sky, your horizon is at 40-90=-50 degrees and 40+90=130 degrees (max is 90), so you could objects with Decs ranging between -50 and 90 Dec.\n
 """
-st.write(plan.getMacInfo())
-st.write(plan.getRLMTInfo())
+mac_col, rlmt_col = st.columns(2)
+
+mac_col.write(plan.getMacInfo())
+rlmt_col.write(plan.getRLMTInfo())
+
+for im in plan.getMacObsPlots(ra,dec,target_name):
+    mac_col.write(im)
+
+for im in plan.getRLMTObsPlots(ra,dec,target_name):
+    rlmt_col.write(im)
