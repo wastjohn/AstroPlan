@@ -272,14 +272,14 @@ def getRLMTObsPlots(ra, dec, name):
     winer = Observer.at_site('Winer')
 
 
-    starttime = Time('2024-01-01 00:00:00')
+    starttime = Time.now()
     obs=EarthLocation(winer.location)
     interval = 7*u.day
     # interval = 1*u.day
 
     midnightlist = []
 
-    for i in range(0,5):  # number of weeks in a year + 1
+    for i in range(0,8):  # number of weeks in a year + 1
     # for i in range(0,365):
         time = starttime + interval*[i]
         midnight = (winer.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
