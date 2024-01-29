@@ -215,14 +215,14 @@ def getMacObsPlots(ra, dec, name):
     source=SkyCoord(ra*u.deg,dec*u.deg)
     mac = Observer(longitude=-93.1691*u.deg, latitude=44.9379*u.deg, elevation=240*u.m, name="Macalester", timezone="US/Central")
 
-    starttime = Time('2024-01-01 00:00:00')
+    starttime = Time.now()
     obs=EarthLocation(mac.location)
     interval = 7*u.day
     # interval = 1*u.day
 
     midnightlist = []
 
-    for i in range(0,5):  # number of weeks in a year + 1
+    for i in range(0,8):  # number of weeks in a year + 1
     # for i in range(0,365):
         time = starttime + interval*[i]
         midnight = (mac.midnight(time, which='next')).to_value('iso',subfmt='date_hm')
