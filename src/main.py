@@ -33,6 +33,9 @@ from astropy.io import ascii
 st.title("AstroPlan")
 
 st.write("This is a web app to help you plan your astrophotography sessions.")
+
+st.write("Link to catalog: https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/543/A156, click on catal_q2")
+
 targets = ascii.read("res/targets.dat")
 st.dataframe(targets)
 
