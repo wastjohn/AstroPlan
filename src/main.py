@@ -30,6 +30,9 @@ import plan
 from astropy.io import ascii
 
 # %matplotlib notebook
+st.set_page_config(page_title="AstroPlan")
+st.sidebar.success("Select another page")
+
 st.title("AstroPlan")
 
 st.write("This is a web app to help you plan your astrophotography sessions.")

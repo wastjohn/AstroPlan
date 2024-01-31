@@ -319,3 +319,14 @@ def getRLMTObsPlots(ra, dec, name):
         plt.close()
         figs.append(fig)
     return figs
+
+def generateRLMTSchedule(title, observer, epoch, target, ra_hms, dec_dms, positioning, filter, duration, cmosmod, utstart, cadence, repeat):
+    result = f"""
+    title '{title}'\n
+    observer '{observer}'\n
+    epoch '{epoch}'\n
+
+    source '{target}' ra {ra_hms} dec {dec_dms} positioning {positioning}\n
+    filter {filter} duration {duration} cmosmod {cmosmod} utstart {utstart} cadence {cadence} repeat {repeat} /\n
+    """
+    return result
